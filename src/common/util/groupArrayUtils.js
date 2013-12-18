@@ -1,6 +1,7 @@
 angular.module("st.common.util.groupArrayUtils", [
-        "st.common.util.objectUtils"
-    ]).factory("groupArrayUtils", function (objectUtils) {
+        "st.common.util.objectUtils",
+        "st.common.util.arrayUtils"
+    ]).factory("groupArrayUtils", function (objectUtils, arrayUtils) {
         "use strict"
         var groupArrayUtils = {
             /**
@@ -33,28 +34,52 @@ angular.module("st.common.util.groupArrayUtils", [
              * @returns {Array.<*>}
              */
             group: function (array, groupDefinition) {
-                var occurrenceHash = {};
-                var groupedData = [];
+                arrayUtils.checkArray(array);
 
-                var key = groupDefinition.by;
-                var keyLabel = groupDefinition.as || key;
-                var listLabel = groupDefinition.in;
+                if (angular.isArray(groupDefinition)) {
+                    return groupArrayUtils._groupByMultipleDefs(array, groupDefinition);
+                } else {
+                    var occurrenceHash = {};
+                    var groupedData = [];
 
-                array.forEach(function (element) {
-                    var value = objectUtils.getProperty(element, key);
-                    var node;
-                    if (occurrenceHash[value] === undefined) {
-                        node = {};
-                        node[keyLabel] = value;
-                        node[listLabel] = [];
-                        occurrenceHash[value] = node;
-                        groupedData.push(node);
-                    }
-                    occurrenceHash[value][listLabel].push(element);
-                });
+                    var key = groupDefinition.by;
+                    var keyLabel = groupDefinition.as || key;
+                    var listLabel = groupDefinition.in;
 
-                return groupedData;
+                    array.forEach(function (element) {
+                        var value = objectUtils.getProperty(element, key);
+                        var node;
+                        if (occurrenceHash[value] === undefined) {
+                            node = {};
+                            node[keyLabel] = value;
+                            node[listLabel] = [];
+                            occurrenceHash[value] = node;
+                            groupedData.push(node);
+                        }
+                        occurrenceHash[value][listLabel].push(element);
+                    });
 
+                    return groupedData;
+                }
+            },
+            _groupByMultipleDefs: function (array, groupDefinitions) {
+                arrayUtils.checkArray(array);
+                arrayUtils.checkArray(groupDefinitions);
+
+                if (groupDefinitions.length === 0) {
+                    return array;
+                } else {
+                    var groupDefinition = groupDefinitions[0];
+                    var groupDefinitionsRest = groupDefinitions.slice(1);
+                    var listLabel = groupDefinition.in;
+
+                    var result = groupArrayUtils.group(array, groupDefinition);
+                    result.forEach(function (element) {
+                        element[listLabel] = groupArrayUtils._groupByMultipleDefs(element[listLabel], groupDefinitionsRest);
+                    });
+
+                    return result
+                }
             }
         };
         return groupArrayUtils;
