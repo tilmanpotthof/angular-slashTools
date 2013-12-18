@@ -1,2 +1,13 @@
+# build output
 dist/
+
+# loaded bower and node dependencies
 bower_components/
+node_modules/
+
+# Emacs noise
+*~
+.*~
+
+# WebStorm noise
+.idea/
