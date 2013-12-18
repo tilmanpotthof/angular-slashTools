@@ -9,8 +9,9 @@
         "url": "http://github.com/ariya/coverage-jasmine-istanbul-karma.git"
     },
     "devDependencies": {
-        "karma": "~0.10.2",
-        "karma-coverage": "~0.1.0"
+        "karma": "0.10.2",
+        "karma-coverage": "~0.1.0",
+	    "wrench": "~1.5.4"
     },
     "scripts": {
         "test": "node_modules/.bin/karma start config/karma.conf.js"
