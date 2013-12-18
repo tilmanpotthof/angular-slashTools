@@ -12,7 +12,9 @@ module.exports = function (config) {
             'src/common/util/objectUtils.js',
             'src/common/util/objectUtils.spec.js',
             'src/common/util/arrayUtils.js',
-            'src/common/util/arrayUtils.spec.js'
+            'src/common/util/arrayUtils.spec.js',
+            'src/common/util/groupArrayUtils.js',
+            'src/common/util/groupArrayUtils.spec.js'
         ],
 
         autoWatch: true,
