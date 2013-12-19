@@ -1,5 +1,5 @@
 # build output
-dist/
+build/
 
 # loaded bower and node dependencies
 bower_components/

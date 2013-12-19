@@ -5,11 +5,11 @@ At the moment their are just three very basic services.
 
 ## Requirements
 
-To build and test the library you need node, npm and bower.
+To build and test the library you need node, npm, grunt-cli and bower.
 How to install node and npm is documented on the projects website: http://nodejs.org/
 Installing bower is easy if you have npm.
 
-    npm install -g bower
+    npm install -g grunt-cli bower
 
 ## Build and test
 
@@ -22,11 +22,8 @@ Notice: `node install` might take a while if you don`t have phantomjs so far.
 
 Now you can build the library with...
 
-    jake
+    grunt
 
-Afterwards you can run the test script in the `dist` folder.
-
-    ./dist/test.js
 
 
 

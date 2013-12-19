@@ -44,6 +44,11 @@ module.exports = function (grunt) {
                 configFile: "build/test/karma.conf.js"
             }
         },
+        shell: {
+            bower_install: {
+                command: "bower install"
+            }
+        },
         clean: {
             build: ["build"]
         }
@@ -52,9 +57,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-shell');
 
 
-    grunt.registerTask('default', ['clean', 'copy', 'concat', 'prepare-test-script', 'karma']);
+    grunt.registerTask('default', ['clean', 'shell:bower_install', 'copy', 'concat', 'prepare-test-script', 'karma']);
 
     grunt.registerTask('prepare-test-script', function () {
         fs.chmodSync('build/test.sh', '755');
