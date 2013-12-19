@@ -1,6 +1,9 @@
 # build output
 build/
 
+# tmp stuff
+tmp/
+
 # loaded bower and node dependencies
 bower_components/
 node_modules/

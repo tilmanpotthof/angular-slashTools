@@ -8,13 +8,7 @@ module.exports = function (config) {
             'bower_components/jquery/jquery.js',
             'bower_components/angular/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
-            'src/common/util/module.js',
-            'src/common/util/objectUtils.js',
-            'src/common/util/objectUtils.spec.js',
-            'src/common/util/arrayUtils.js',
-            'src/common/util/arrayUtils.spec.js',
-            'src/common/util/groupArrayUtils.js',
-            'src/common/util/groupArrayUtils.spec.js'
+            'src/**/*.js'
         ],
 
         autoWatch: true,

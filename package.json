@@ -23,6 +23,6 @@
         "grunt-karma": "~0.6"
     },
     "scripts": {
-        "test": "node_modules/.bin/karma start config/karma.conf.js"
+        "test": "node_modules/.bin/karma start test/config/karma.conf.js"
     }
 }
