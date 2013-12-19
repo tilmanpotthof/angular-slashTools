@@ -1,8 +1,10 @@
 module.exports = function (config) {
-    var BASE = '../';
+    var basePath = '../';
+
+    console.log("basePath: " + require("path").resolve(basePath));
 
     config.set({
-        basePath: BASE,
+        basePath: basePath,
 
         files: [
             'bower_components/jquery/jquery.js',
@@ -28,8 +30,7 @@ module.exports = function (config) {
             '*.js': 'coverage'
         },
         coverageReporter : {
-            type : 'html',
-            dir : 'tmp/coverage/'
+            type : 'text'
         }
     });
 };

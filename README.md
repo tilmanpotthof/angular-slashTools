@@ -5,15 +5,15 @@ At the moment their are just three very basic services.
 
 ## Requirements
 
-To build and test the library you need node, npm, jake and bower.
+To build and test the library you need node, npm and bower.
 How to install node and npm is documented on the projects website: http://nodejs.org/
-Installing jake and bower is easy if you have npm.
+Installing bower is easy if you have npm.
 
-    npm install -g jake bower
+    npm install -g bower
 
 ## Build and test
 
-First you need to load the bower and node dependencies.
+First you need to install the bower and node dependencies.
 
     bower install
     node install
