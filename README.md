@@ -1,4 +1,4 @@
-# slashTools [![Build Status](https://travis-ci.org/tpotthof/angular-slashTools.png)](https://travis-ci.org/tpotthof/angular-slashTools)
+# slashTools [![Build Status](https://travis-ci.org/tilmanpotthof/angular-slashTools.png)](https://travis-ci.org/tilmanpotthof/angular-slashTools)
 
 
 slashTools is a collection of AngularJS services.
