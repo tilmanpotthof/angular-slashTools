@@ -13,7 +13,7 @@ module.exports = function (grunt) {
         concat: {
             options: {},
             js: {
-                src: ['src/common/util/*.js'],
+                src: ['src/**/*.js'],
                 dest: 'build/angular-slashTools.js',
                 filter: function (filepath) {
                     //console.log(filepath);
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
                 }
             },
             test: {
-                src: ['src/common/util/*.spec.js'],
+                src: ['src/**/*.spec.js'],
                 dest: 'build/test/angular-slashTools.spec.js'
             }
         },
