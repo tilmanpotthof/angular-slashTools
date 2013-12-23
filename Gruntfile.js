@@ -51,13 +51,20 @@ module.exports = function (grunt) {
         },
         clean: {
             build: ["build"]
+        },
+        watch:  {
+            scripts: {
+                files: ['src/**', 'build-resources/**'],
+                tasks: ['default']
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-karma');
-	grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
 
     grunt.registerTask('default', ['clean', 'shell:bower_install', 'copy', 'concat', 'prepare-test-script', 'karma']);
