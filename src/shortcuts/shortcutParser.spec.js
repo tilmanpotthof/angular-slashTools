@@ -4,7 +4,7 @@
 /* jasmine specs for services go here */
 
 describe('service', function () {
-    beforeEach(module('st.common.shortcutParser'));
+    beforeEach(module('st.shortcuts.shortcutParser'));
 
     describe('shortcutParser.create', function () {
         it('should return a new ctrl+A shortcut', inject(function (shortcutParser) {

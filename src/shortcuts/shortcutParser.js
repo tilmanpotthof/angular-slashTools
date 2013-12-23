@@ -66,8 +66,7 @@
         }
     };
 
-
-    angular.module("st.common.shortcutParser", ["st.common.util.arrayUtils"]).factory("shortcutParser", function (arrayUtils) {
+    angular.module("st.shortcuts.shortcutParser", ["st.common.util.arrayUtils"]).factory("shortcutParser", function (arrayUtils) {
         return {
             create: function (key, optionKeys, action, options) {
                 if (angular.isObject(optionKeys)) {
