@@ -24,11 +24,8 @@ module.exports = function (config) {
         reporters: ['progress', 'coverage'],
 
         preprocessors : {
-            'src/common/util/*.js': 'coverage'
+            'src/**/*.js': 'coverage'
         },
-        coverageReporter : {
-            type : 'html',
-            dir : 'tmp/coverage/'
-        }
+        coverageReporter : { type : 'html', dir : 'tmp/coverage/'}
     });
 };
