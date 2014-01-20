@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    angular.module("st.common.util.objectUtils", []).factory("objectUtils", function () {
+    angular.module("st.common.util.objectUtils", []).factory("objectUtils", [function () {
         return {
             getProperty: function (o, propertyPath) {
                 var propertyPieces = propertyPath.split(".");
@@ -35,6 +35,6 @@
                 o[lastPiece] = property;
             }
         };
-    });
+    }]);
 
 }());

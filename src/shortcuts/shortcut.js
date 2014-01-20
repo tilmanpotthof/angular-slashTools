@@ -1,6 +1,6 @@
 angular.module("st.shortcuts.shortcut", [
         "st.shortcuts.shortcutRegistry"
-    ]).directive("shortcut", function ($parse, $log, shortcutRegistry) {
+    ]).directive("shortcut", ["$parse", "$log", "shortcutRegistry", function ($parse, $log, shortcutRegistry) {
         "use strict";
 
         return {
@@ -53,4 +53,4 @@ angular.module("st.shortcuts.shortcut", [
                 });
             }
         };
-    });
+    }]);

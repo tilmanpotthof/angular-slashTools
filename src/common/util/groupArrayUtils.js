@@ -1,7 +1,7 @@
 angular.module("st.common.util.groupArrayUtils", [
         "st.common.util.objectUtils",
         "st.common.util.arrayUtils"
-    ]).factory("groupArrayUtils", function (objectUtils, arrayUtils) {
+    ]).factory("groupArrayUtils", ["objectUtils", "arrayUtils", function (objectUtils, arrayUtils) {
         "use strict"
         var groupArrayUtils = {
             /**
@@ -83,4 +83,4 @@ angular.module("st.common.util.groupArrayUtils", [
             }
         };
         return groupArrayUtils;
-    });
+    }]);

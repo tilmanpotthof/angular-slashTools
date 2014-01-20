@@ -1,6 +1,6 @@
 angular.module("st.common.util.arrayUtils", [
         "st.common.util.objectUtils"
-    ]).factory("arrayUtils", function (objectUtils) {
+    ]).factory("arrayUtils", ["objectUtils", function (objectUtils) {
         "use strict"
         var arrayUtils = {
             /**
@@ -118,4 +118,4 @@ angular.module("st.common.util.arrayUtils", [
             }
         };
         return arrayUtils;
-    });
+    }]);

@@ -1,7 +1,7 @@
 angular.module("st.shortcuts.shortcutRegistry", [
         "st.common.util.arrayUtils",
         "st.shortcuts.shortcutParser"
-    ]).factory("shortcutRegistry", function ($log, shortcutParser, arrayUtils) {
+    ]).factory("shortcutRegistry", ["$log", "shortcutParser", "arrayUtils", function ($log, shortcutParser, arrayUtils) {
         "use strict";
 
         var shortcutRegistry = [];
@@ -43,4 +43,4 @@ angular.module("st.shortcuts.shortcutRegistry", [
                 });
             }
         };
-    });
+    }]);

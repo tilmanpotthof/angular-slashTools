@@ -10,7 +10,7 @@ module.exports = function (config) {
             'bower_components/jquery/jquery.js',
             'bower_components/angular/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
-            'angular-slashTools.js',
+            'angular-slashTools.min.js',
             'test/angular-slashTools.spec.js'
         ],
 

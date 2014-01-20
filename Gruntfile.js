@@ -40,7 +40,7 @@ module.exports = function (grunt) {
             }
         },
         karma: {
-            unit: {
+            default: {
                 configFile: "build/test/karma.conf.js"
             }
         },
@@ -57,6 +57,16 @@ module.exports = function (grunt) {
                 files: ['src/**', 'build-resources/**'],
                 tasks: ['default']
             }
+        },
+        uglify: {
+            default: {
+                options: {
+                    mangle: true
+                },
+                files: {
+                    'build/angular-slashTools.min.js': ['build/angular-slashTools.js']
+                }
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -65,9 +75,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-
-    grunt.registerTask('default', ['clean', 'shell:bower_install', 'copy', 'concat', 'prepare-test-script', 'karma']);
+    grunt.registerTask('default', ['clean', 'shell:bower_install', 'copy', 'concat', 'uglify', 'karma']);
 
     grunt.registerTask('prepare-test-script', function () {
         fs.chmodSync('build/test.sh', '755');
