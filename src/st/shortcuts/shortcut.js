@@ -3,6 +3,14 @@ angular.module("st.shortcuts.shortcut", [
     ]).directive("shortcut", ["$parse", "$log", "shortcutRegistry", function ($parse, $log, shortcutRegistry) {
         "use strict";
 
+        /**
+         * @ngdoc directive
+         * @name st.shortcuts.shortcut:shortcut
+         *
+         * @description
+         * TODO
+         *
+         */
         return {
             restrict: "A,E",
             link: function ($scope, element, attributes) {

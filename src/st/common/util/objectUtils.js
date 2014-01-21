@@ -2,6 +2,14 @@
     "use strict";
 
     angular.module("st.common.util.objectUtils", []).factory("objectUtils", [function () {
+        /**
+         * @ngdoc service
+         * @name st.common.util.objectUtils
+         *
+         * @description
+         * TODO
+         *
+         */
         return {
             getProperty: function (o, propertyPath) {
                 var propertyPieces = propertyPath.split(".");

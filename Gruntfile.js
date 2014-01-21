@@ -80,7 +80,16 @@ module.exports = function (grunt) {
         },
         ngdocs: {
             options: {
-                scripts: ['angular.js', 'build/angular-slashTools.js', '//localhost:35729/livereload.js'],
+                scripts: [
+                    'angular.js',
+                    'doc-resources/google-code-prettify.js',
+                    'build/angular-slashTools.js',
+                    '//localhost:35729/livereload.js'
+                ],
+                styles: [
+                    'doc-resources/doc-style.css',
+                    'doc-resources/prettify.css'
+                ],
                 html5Mode: false
             },
             all: ["src/**/*.js"]

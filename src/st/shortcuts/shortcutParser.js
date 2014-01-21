@@ -67,6 +67,14 @@
         }
     };
 
+    /**
+     * @ngdoc service
+     * @name st.shortcuts.shortcutParser
+     *
+     * @description
+     * TODO
+     *
+     */
     angular.module("st.shortcuts.shortcutParser", ["st.common.util.arrayUtils"]).factory("shortcutParser", ["arrayUtils", function (arrayUtils) {
         return {
             create: function (key, optionKeys, action, options) {

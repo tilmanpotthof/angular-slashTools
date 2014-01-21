@@ -25,6 +25,14 @@ angular.module("st.shortcuts.shortcutRegistry", [
 
         jQuery(document).on("keydown", applyEvent);
 
+        /**
+         * @ngdoc service
+         * @name st.shortcuts.shortcutRegistry
+         *
+         * @description
+         * TODO
+         *
+         */
         return {
             register: function (notation, action, options) {
                 var shortcut = shortcutParser.parse(notation, action, options);

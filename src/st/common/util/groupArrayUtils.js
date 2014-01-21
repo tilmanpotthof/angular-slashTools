@@ -3,6 +3,14 @@ angular.module("st.common.util.groupArrayUtils", [
         "st.common.util.arrayUtils"
     ]).factory("groupArrayUtils", ["objectUtils", "arrayUtils", function (objectUtils, arrayUtils) {
         "use strict"
+        /**
+         * @ngdoc service
+         * @name st.common.util.groupArrayUtils
+         *
+         * @description
+         * TODO
+         *
+         */
         var groupArrayUtils = {
             /**
              * Groups array elements by attributes specified in the groupDefinition.
