@@ -50,12 +50,22 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            build: ["build"]
+            build: ["build", "docs"]
         },
         watch:  {
-            scripts: {
+            default: {
                 files: ['src/**', 'build-resources/**'],
-                tasks: ['default']
+                tasks: ['default'],
+                options: {
+                    livereload: true
+                }
+            },
+            docs: {
+                files: ['src/**'],
+                tasks: ['ngdocs:all'],
+                options: {
+                    livereload: true
+                }
             }
         },
         uglify: {
@@ -67,8 +77,23 @@ module.exports = function (grunt) {
                     'build/angular-slashTools.min.js': ['build/angular-slashTools.js']
                 }
             }
+        },
+        ngdocs: {
+            options: {
+                scripts: ['angular.js', 'build/angular-slashTools.js', '//localhost:35729/livereload.js'],
+                html5Mode: false
+            },
+            all: ["src/**/*.js"]
+        },
+        connect: {
+            server: {
+                options: {
+                    open: 'http://localhost:8000/docs/#/api'
+                }
+            }
         }
     });
+
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -76,10 +101,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-ngdocs');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ['clean', 'shell:bower_install', 'copy', 'concat', 'uglify', 'karma']);
+    grunt.registerTask('default', ['clean', 'shell:bower_install', 'copy', 'concat', 'uglify', 'karma', 'ngdocs:all']);
 
-    grunt.registerTask('prepare-test-script', function () {
-        fs.chmodSync('build/test.sh', '755');
-    });
+    grunt.registerTask('default+docs', ['connect', 'watch:default'])
+    grunt.registerTask('dev-docs', ['connect', 'watch:docs'])
+
 };
