@@ -1,6 +1,7 @@
 {
     "name": "angular-slashTools",
     "version": "0.1-rc1",
+    "devVersion": "0.1-build",
     "description": "",
     "info": {
         "licence": "MIT-LICENCE",

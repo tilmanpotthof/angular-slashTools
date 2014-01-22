@@ -7,12 +7,15 @@ var globPatterns = {
 
 module.exports = function (grunt) {
 
-    var GIT_INFO = {};
+    var GIT = {};
+    var BUILD = {}
+    var PKG = grunt.file.readJSON('package.json');
 
     // Project configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        git: GIT_INFO,
+        pkg: PKG,
+        git: GIT,
+        build: BUILD,
         concat: {
             options: {
                 banner: bannerHelper().generateBanner(),
@@ -52,20 +55,31 @@ module.exports = function (grunt) {
             bower_install: {
                 command: "bower install"
             },
-            githash: {
+            gitHash: {
                 command: "git log --pretty=format:'%h' -n 1",
                 options: {
                     callback: function (err, stdout, stderr, cb) {
-                        GIT_INFO.hash = stdout;
+                        GIT.hash = stdout;
+                        console.log("git-version: " + GIT.hash);
                         cb();
                     }
                 }
             },
-            gitstatus: {
+            gitStatus: {
                 command: "git status -s",
                 options: {
                     callback: function (err, stdout, stderr, cb) {
-                        GIT_INFO.status = stdout;
+                        GIT.status = stdout;
+                        cb();
+                    }
+                }
+            },
+            gitVersionHash: {
+                command: "git log --pretty=format:'%h' -n 1 v" + PKG.version,
+                options: {
+                    callback: function (err, stdout, stderr, cb) {
+                        GIT.versionHash = stdout;
+                        console.log("git-hash of pkg.version tag: " + GIT.versionHash);
                         cb();
                     }
                 }
@@ -74,7 +88,7 @@ module.exports = function (grunt) {
         clean: {
             build: ["build", "docs"]
         },
-        watch:  {
+        watch: {
             default: {
                 files: ['src/**', 'resources/build/**'],
                 tasks: ['default'],
@@ -148,7 +162,7 @@ module.exports = function (grunt) {
             },
             generateBanner: function () {
                 var lines = [
-                    "<%= pkg.name %> v<%= pkg.version %>",
+                    "<%= pkg.name %> v<%= build.version() %>",
                     "source: <%= pkg.info.repository %>",
                     "",
                     "<%= git.info() %>",
@@ -158,20 +172,33 @@ module.exports = function (grunt) {
             },
             generateShortBanner: function () {
                 var lines = [
-                    "<%= pkg.name %> v<%= pkg.version %> | <%= git.info() %>"
+                    "<%= pkg.name %> v<%= build.version() %> | <%= git.info() %>"
                 ];
                 return this.multilineCommentFromLines(lines);
             }
         }
     };
 
-    GIT_INFO.info = function () {
-        var gitVersionComment =  "git-version: " + GIT_INFO.hash;
-        var statusClean = /^\s*$/.test(GIT_INFO.status);
-        if (statusClean) {
+    GIT.info = function () {
+        var gitVersionComment = "git-version: " + GIT.hash;
+        if (this.isClean()) {
             return gitVersionComment;
         } else {
             return gitVersionComment + " (WARNING: Repo had uncommitted changed while creating the build.)"
         }
     };
+    GIT.isClean = function () {
+        return /^\s*$/.test(GIT.status);
+    };
+    GIT.isTaggedWithPackageVersion = function () {
+        return GIT.hash === GIT.versionHash
+    };
+
+    BUILD.version = function () {
+        if (GIT.isTaggedWithPackageVersion() && GIT.isClean()) {
+            return PKG.version;
+        } else {
+            return PKG.devVersion + "-sha." + GIT.hash;
+        }
+    }
 };
