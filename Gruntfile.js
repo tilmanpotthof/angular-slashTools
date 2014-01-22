@@ -30,7 +30,7 @@ module.exports = function (grunt) {
         copy: {
             resources: {
                 files: [
-                    {expand: true, cwd: 'build-resources/', src: ['**'], dest: 'build/'}
+                    {expand: true, cwd: 'resources/build/', src: ['**'], dest: 'build/'}
                 ]
             },
             bower_components: {
@@ -54,7 +54,7 @@ module.exports = function (grunt) {
         },
         watch:  {
             default: {
-                files: ['src/**', 'build-resources/**'],
+                files: ['src/**', 'resources/build/**'],
                 tasks: ['default'],
                 options: {
                     livereload: true
@@ -82,13 +82,13 @@ module.exports = function (grunt) {
             options: {
                 scripts: [
                     'angular.js',
-                    'doc-resources/google-code-prettify.js',
+                    'resources/docs/google-code-prettify.js',
                     'build/angular-slashTools.js',
                     '//localhost:35729/livereload.js'
                 ],
                 styles: [
-                    'doc-resources/doc-style.css',
-                    'doc-resources/prettify.css'
+                    'resources/docs/doc-style.css',
+                    'resources/docs/prettify.css'
                 ],
                 html5Mode: false
             },
