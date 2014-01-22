@@ -1,6 +1,12 @@
 {
     "name": "angular-slashTools",
+    "version": "0.1-rc1",
     "description": "",
+    "info": {
+        "licence": "MIT-LICENCE",
+        "licenceUrl": "https://raw2.github.com/tilmanpotthof/angular-slashTools/master/LICENCE",
+        "repository": "https://github.com/tilmanpotthof/angular-slashTools"
+    },
     "engines": {
         "node": ">=0.8.0"
     },

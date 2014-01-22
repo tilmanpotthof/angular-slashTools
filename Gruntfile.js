@@ -7,18 +7,22 @@ var globPatterns = {
 
 module.exports = function (grunt) {
 
+    var GIT_INFO = {};
+
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        git: GIT_INFO,
         concat: {
-            options: {},
+            options: {
+                banner: bannerHelper().generateBanner(),
+                stripBanners: true
+            },
             js: {
                 src: ['src/**/*.js'],
                 dest: 'build/angular-slashTools.js',
                 filter: function (filepath) {
-                    //console.log(filepath);
                     var isTest = minimatch(filepath, globPatterns.tests);
-                    //console.log(isTest);
                     return !isTest;
                 }
             },
@@ -47,6 +51,24 @@ module.exports = function (grunt) {
         shell: {
             bower_install: {
                 command: "bower install"
+            },
+            githash: {
+                command: "git log --pretty=format:'%h' -n 1",
+                options: {
+                    callback: function (err, stdout, stderr, cb) {
+                        GIT_INFO.hash = stdout;
+                        cb();
+                    }
+                }
+            },
+            gitstatus: {
+                command: "git status -s",
+                options: {
+                    callback: function (err, stdout, stderr, cb) {
+                        GIT_INFO.status = stdout;
+                        cb();
+                    }
+                }
             }
         },
         clean: {
@@ -71,7 +93,8 @@ module.exports = function (grunt) {
         uglify: {
             default: {
                 options: {
-                    mangle: true
+                    mangle: true,
+                    banner: bannerHelper().generateShortBanner()
                 },
                 files: {
                     'build/angular-slashTools.min.js': ['build/angular-slashTools.js']
@@ -113,9 +136,42 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-ngdocs');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ['clean', 'shell:bower_install', 'copy', 'concat', 'uglify', 'karma', 'ngdocs:all']);
+    grunt.registerTask('default', ['clean', 'shell', 'copy', 'concat', 'uglify', 'karma', 'ngdocs:all']);
 
     grunt.registerTask('default+docs', ['connect', 'watch:default'])
     grunt.registerTask('dev-docs', ['connect', 'watch:docs'])
 
+    function bannerHelper() {
+        return {
+            multilineCommentFromLines: function (lines) {
+                return "/*!\n * " + lines.join("\n * ") + "\n */\n"
+            },
+            generateBanner: function () {
+                var lines = [
+                    "<%= pkg.name %> v<%= pkg.version %>",
+                    "source: <%= pkg.info.repository %>",
+                    "",
+                    "<%= git.info() %>",
+                    "Licence: <%= pkg.info.licence %> (<%= pkg.info.licenceUrl %>)"
+                ];
+                return this.multilineCommentFromLines(lines);
+            },
+            generateShortBanner: function () {
+                var lines = [
+                    "<%= pkg.name %> v<%= pkg.version %> | <%= git.info() %>"
+                ];
+                return this.multilineCommentFromLines(lines);
+            }
+        }
+    };
+
+    GIT_INFO.info = function () {
+        var gitVersionComment =  "git-version: " + GIT_INFO.hash;
+        var statusClean = /^\s*$/.test(GIT_INFO.status);
+        if (statusClean) {
+            return gitVersionComment;
+        } else {
+            return gitVersionComment + " (WARNING: Repo had uncommitted changed while creating the build.)"
+        }
+    };
 };
