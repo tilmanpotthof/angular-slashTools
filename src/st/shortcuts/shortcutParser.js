@@ -3,7 +3,7 @@
 
     var OPTION_KEYS = "alt|ctrl|meta|shift|cmd";
     var OPTION_KEYS_ARRAY = OPTION_KEYS.split("|");
-    var SHORTCUT_REGEX = /^((alt|ctrl|meta|shift|cmd)\+)*([a-zA-Z0-9]|enter|esc|left|right|up|down)$/;
+    var SHORTCUT_REGEX = /^((alt|ctrl|meta|shift|cmd)\+)*([a-zA-Z0-9]|enter|esc|left|right|up|down|num[0-9])$/;
 
     var keyCodes = {
         "enter": 13,
