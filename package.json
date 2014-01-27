@@ -1,8 +1,8 @@
 {
     "name": "angular-slashTools",
-    "version": "0.1-rc2",
-    "devVersion": "0.1-build",
-    "description": "",
+    "version": "0.1.0-rc2",
+    "devVersion": "0.1.0-build",
+    "description": "Collection of services and directives.",
     "info": {
         "licence": "MIT-LICENCE",
         "licenceUrl": "https://raw2.github.com/tilmanpotthof/angular-slashTools/master/LICENCE",
