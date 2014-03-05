@@ -49,6 +49,9 @@ module.exports = function (grunt) {
         karma: {
             default: {
                 configFile: "build/test/karma.conf.js"
+            },
+            source: {
+                configFile: "test/config/karma.conf.js"
             }
         },
         shell: {
@@ -150,10 +153,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-ngdocs');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ['clean', 'shell', 'copy', 'concat', 'uglify', 'karma', 'ngdocs:all']);
+    grunt.registerTask('default', ['clean', 'shell', 'copy', 'concat', 'uglify', 'karma:default', 'ngdocs:all']);
 
     grunt.registerTask('default+docs', ['connect', 'watch:default'])
     grunt.registerTask('dev-docs', ['connect', 'watch:docs'])
+    grunt.registerTask('dev-tests', ['karma:source'])
 
     function bannerHelper() {
         return {
