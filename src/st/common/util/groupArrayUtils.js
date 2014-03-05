@@ -8,7 +8,10 @@ angular.module("st.common.util.groupArrayUtils", [
          * @name st.common.util.groupArrayUtils
          *
          * @description
-         * TODO
+         * Service to group objects stored in arrays by property values.
+         * For example an array of users can be grouped by their cities,
+         * even if the city is stored a the attribute like `address.city`.
+         *
          *
          */
         var groupArrayUtils = {
