@@ -1,6 +1,7 @@
 # build output
 build/
 docs/
+coverage/
 
 # tmp stuff
 tmp/
