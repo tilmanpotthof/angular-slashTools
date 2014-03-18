@@ -19,9 +19,9 @@ Installing bower is easy if you have npm.
 First you need to install the bower and node dependencies.
 
     bower install
-    node install
+    npm install
 
-Notice: `node install` might take a while if you don`t have phantomjs so far.
+Notice: `npm install` might take a while if you don`t have phantomjs so far.
 
 Now you can build the library with...
 
