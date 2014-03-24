@@ -98,6 +98,9 @@
                             optionKeys[part] = true;
                         }
                     });
+                    if (angular.isObject(options)) {
+                        options.notation = shortcutNotation;
+                    }
                     return this.create(key, optionKeys, action, options);
 
                 } else {

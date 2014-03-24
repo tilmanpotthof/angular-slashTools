@@ -17,6 +17,9 @@ angular.module("st.shortcuts.shortcut", [
                 var action, notation;
 
                 if (element.is("shortcut")) {
+                    if (!attributes.keys) {
+                        throw new Error("Attribute 'keys' is required for the shortcut directive.")
+                    }
                     notation = attributes.keys.toLowerCase();
                 } else {
                     notation = attributes.shortcut.toLowerCase();

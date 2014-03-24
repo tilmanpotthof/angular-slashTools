@@ -49,6 +49,9 @@ angular.module("st.shortcuts.shortcutRegistry", [
                         description: shortcut.description
                     };
                 });
+            },
+            getAll: function () {
+              return angular.copy(shortcutRegistry);
             }
         };
     }]);
