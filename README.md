@@ -1,5 +1,4 @@
-# slashTools [![Build Status](https://travis-ci.org/tilmanpotthof/angular-slashTools.png)](https://travis-ci.org/tilmanpotthof/angular-slashTools)
-
+# slashTools [![Build Status](https://travis-ci.org/tilmanpotthof/angular-slashTools.png)](https://travis-ci.org/tilmanpotthof/angular-slashTools) [![Coverage Status](https://coveralls.io/repos/tilmanpotthof/angular-slashTools/badge.png?branch=master)](https://coveralls.io/r/tilmanpotthof/angular-slashTools?branch=master)
 
 The library 'slashTools' is a work in progress collection of angularJS services.
 At the moment their are just three very basic services in the `st.common.util` module.
