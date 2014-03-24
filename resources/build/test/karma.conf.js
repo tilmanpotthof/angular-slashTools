@@ -11,6 +11,8 @@ module.exports = function (config) {
             'angular-slashTools.spec.js'
         ],
 
+        logLevel: config.LOG_INFO,
+
         singleRun: true,
 
         frameworks: ['jasmine'],
@@ -34,6 +36,10 @@ module.exports = function (config) {
             },
             {
               type: "text"
+            },
+            {
+              type: "html",
+              dir: "../coverage"
             }
           ]
         }
