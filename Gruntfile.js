@@ -140,6 +140,13 @@ module.exports = function (grunt) {
                     open: 'http://localhost:8000/docs/#/api'
                 }
             }
+        },
+        coveralls: {
+          options: {
+            debug: true,
+            coverage_dir: 'build/coverage',
+            force: true
+          }
         }
     });
 
@@ -152,6 +159,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-ngdocs');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-karma-coveralls');
 
     grunt.registerTask('default', ['clean', 'shell', 'copy', 'concat', 'uglify', 'karma:default', 'ngdocs:all']);
 

@@ -1,17 +1,14 @@
 module.exports = function (config) {
-    var basePath = '../';
 
-    console.log("basePath: " + require("path").resolve(basePath));
 
     config.set({
-        basePath: basePath,
 
         files: [
-            'bower_components/jquery/jquery.js',
-            'bower_components/angular/angular.js',
-            'bower_components/angular-mocks/angular-mocks.js',
-            'angular-slashTools.min.js',
-            'test/angular-slashTools.spec.js'
+            '../bower_components/jquery/jquery.js',
+            '../bower_components/angular/angular.js',
+            '../bower_components/angular-mocks/angular-mocks.js',
+            '../angular-slashTools.js',
+            'angular-slashTools.spec.js'
         ],
 
         singleRun: true,
@@ -27,10 +24,18 @@ module.exports = function (config) {
         reporters: ['progress', 'coverage'],
 
         preprocessors : {
-            '*.js': 'coverage'
+            '../angular-slashTools.js': 'coverage'
         },
-        coverageReporter : {
-            type : 'text'
+        coverageReporter: {
+          reporters: [
+            {
+              type: "lcov",
+              dir: "../coverage"
+            },
+            {
+              type: "text"
+            }
+          ]
         }
     });
 };

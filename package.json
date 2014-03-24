@@ -32,6 +32,7 @@
         "grunt-contrib-watch": "~0.6.1",
         "grunt-shell": "~0.6.4",
         "grunt-karma": "~0.8.2",
+        "grunt-karma-coveralls": "~2.4.3",
         "grunt-ngdocs": "~0.2.1"
 },
     "scripts": {
