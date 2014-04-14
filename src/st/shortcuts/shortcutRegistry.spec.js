@@ -13,11 +13,11 @@ describe('service', function () {
             }).toThrow(new Error("Shortcut notation not correct: 'undefined'"));
         }));
 
-        it('should create a shortcut', inject(function (shortcutRegistry, shortcutParser) {
+        it('should create a shortcut', inject(function (shortcutRegistry) {
             var shortcut = shortcutRegistry.register("cmd+a");
             var shortcuts = shortcutRegistry.getAll();
             expect(shortcuts.length).toEqual(1);
-            expect(shortcuts).toEqual([shortcut]);
+            expect(shortcuts[0]).toEqual(angular.copy(shortcut));
         }));
 
         it('should register a shortcut', inject(function (shortcutRegistry, shortcutParser) {
@@ -50,7 +50,8 @@ describe('service', function () {
 
             var shortcuts = shortcutRegistry.getAll();
             expect(shortcuts.length).toEqual(2);
-            expect(shortcuts).toEqual([copyShortcut, pasteShortcut]);
+            expect(shortcuts[0]).toEqual(angular.copy(copyShortcut));
+            expect(shortcuts[1]).toEqual(angular.copy(pasteShortcut));
         }));
     });
 
