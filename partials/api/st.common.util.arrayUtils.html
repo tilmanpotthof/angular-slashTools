@@ -1,0 +1,93 @@
+<h1><code ng:non-bindable="">arrayUtils</code>
+<div><span class="hint">service in module <code ng:non-bindable="">st.common.util</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="st-common-util-arrayutils-page"><p>Util service to simplify working with arrays.</p>
+</div></div>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_addonce">addOnce(element, array, objectEquality)</h3>
+<div class="addonce"><div class="st-common-util-arrayutils-addonce-page"><p>Adds an element to an array, if no identical element is in the array and returns <code>true</code>.
+Otherwise the element is ignored and the function returns <code>false</code>.</p>
+<p>With the optional parameter <code>objectEquality</code> objects are compared by equality not identity with the
+<a href="http://code.angularjs.org/1.2.9/docs/api/angular.equals">angular.equals</a> function.             .</p>
+</div><h5 id="methods_addonce_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>element</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="st-common-util-arrayutils-addonce-page"><p>Element to add</p>
+</div></td></tr><tr><td>array</td><td><a href="" class="label type-hint type-hint-array">Array.&lt;*&gt;</a></td><td><div class="st-common-util-arrayutils-addonce-page"><p>Array</p>
+</div></td></tr><tr><td>objectEquality <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="st-common-util-arrayutils-addonce-page"><p>If <code>true</code> objects are compared by equality not identity.</p>
+</div> <p><em>(default: false)</em></p></td></tr></tbody></table><h5 id="methods_addonce_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="st-common-util-arrayutils-addonce-page"><p>Returns <code>true</code> if the element was added otherwise <code>false</code>.</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_checkarray">checkArray(array)</h3>
+<div class="checkarray"><div class="st-common-util-arrayutils-checkarray-page"><p>Checks if the argument is an `array and throws an exception if it is not.
+Uses the <a href="http://code.angularjs.org/1.2.9/docs/api/angular.isArray">angular.isArray</a> function
+internally.</p>
+</div><h5 id="methods_checkarray_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>array</td><td><a href="" class="label type-hint type-hint-array">Array.&lt;*&gt;</a></td><td><div class="st-common-util-arrayutils-checkarray-page"><p>Array to be checked</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_extractpropertiesfromarray">extractPropertiesFromArray(array, propertyPath)</h3>
+<div class="extractpropertiesfromarray"><div class="st-common-util-arrayutils-extractpropertiesfromarray-page"><p>Extracts properties from an array of objects. Not existing properties are ignored.</p>
+<p>Uses the <a href="#/api/st.common.util.objectUtils.getProperty">objectUtils.getProperty</a> function internally.</p>
+<pre class="prettyprint linenums">
+             var users = [
+             {
+                 username: "tpotthof",
+                 address: {
+                     city: "Mainz"
+                 }
+             },
+             {
+                 username: "pmueller",
+                 address: {
+                     city: "Frankfurt"
+                 }
+             },
+             {
+                 username: "aschmidt",
+                 address: {
+                     city: "Mainz"
+                 }
+             },
+             {
+                 username: "nlarssen",
+                 address: null
+             }];
+
+             // returns ["tpotthof", "pmueller", "aschmidt", "nlarssen]
+             arrayUtils.extractPropertiesFromArray(users, "username");
+
+             // returns ["Mainz", "Frankfurt", "Wiesbaden"]
+             arrayUtils.extractPropertiesFromArray(users, "address.city");
+             </pre>
+</div><h5 id="methods_extractpropertiesfromarray_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>array</td><td><a href="" class="label type-hint type-hint-array">Array.&lt;*&gt;</a></td><td><div class="st-common-util-arrayutils-extractpropertiesfromarray-page"><p>Array with properties to extract</p>
+</div></td></tr><tr><td>propertyPath</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="st-common-util-arrayutils-extractpropertiesfromarray-page"><p>Path to the property (e.g. &quot;address.city&quot;)</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_inarray">inArray(element, array, objectEquality)</h3>
+<div class="inarray"><div class="st-common-util-arrayutils-inarray-page"><p>Returns true, if an identical <code>element</code> is in an <code>array</code>.
+The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf">Array.prototype.indexOf</a>
+function is used internally unless the optional parameter <code>objectEquality</code> is set to <code>true</code>.</p>
+<p>With the optional parameter <code>objectEquality</code> objects are compared by equality not identity with the
+<a href="http://code.angularjs.org/1.2.9/docs/api/angular.equals">angular.equals</a> function.             .</p>
+<pre class="prettyprint linenums">
+             arrayUtils.inArray("a", ["a", "b", "c"]); // true
+             </pre>
+</div><h5 id="methods_inarray_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>element</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="st-common-util-arrayutils-inarray-page"><p>Element to check</p>
+</div></td></tr><tr><td>array</td><td><a href="" class="label type-hint type-hint-array">Array.&lt;*&gt;</a></td><td><div class="st-common-util-arrayutils-inarray-page"><p>Array</p>
+</div></td></tr><tr><td>objectEquality <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="st-common-util-arrayutils-inarray-page"><p>If <code>true</code> objects are compared by equality not identity.</p>
+</div> <p><em>(default: false)</em></p></td></tr></tbody></table><h5 id="methods_inarray_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="st-common-util-arrayutils-inarray-page"><p>Returns <code>true</code> if the element is found.</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_remove">remove(element, array, objectEquality)</h3>
+<div class="remove"><div class="st-common-util-arrayutils-remove-page"><p>Removes an identical element from an array and returns the array.</p>
+<p>With the optional parameter <code>objectEquality</code> objects are compared by equality not identity with the
+<a href="http://code.angularjs.org/1.2.9/docs/api/angular.equals">angular.equals</a> function.             .</p>
+</div><h5 id="methods_remove_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>element</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="st-common-util-arrayutils-remove-page"><p>Element to remove</p>
+</div></td></tr><tr><td>array</td><td><a href="" class="label type-hint type-hint-array">Array.&lt;*&gt;</a></td><td><div class="st-common-util-arrayutils-remove-page"><p>Array</p>
+</div></td></tr><tr><td>objectEquality <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="st-common-util-arrayutils-remove-page"><p>If <code>true</code> objects are compared by equality not identity.</p>
+</div> <p><em>(default: false)</em></p></td></tr></tbody></table><h5 id="methods_remove_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-array">Array.&lt;*&gt;</a></td><td><div class="st-common-util-arrayutils-remove-page"><p>Returns the <code>array</code> to allow method chaining.</p>
+</div></td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>

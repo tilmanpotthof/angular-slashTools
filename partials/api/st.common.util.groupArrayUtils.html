@@ -1,0 +1,123 @@
+<h1><code ng:non-bindable="">groupArrayUtils</code>
+<div><span class="hint">service in module <code ng:non-bindable="">st.common.util</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="st-common-util-grouparrayutils-page"><p>Service to group objects stored in arrays by property values.
+For example an array of users can be grouped by their cities,
+even if the city is stored a the attribute like <code>address.city</code>.</p>
+</div></div>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_group">group(array, groupDefinition)</h3>
+<div class="group"><div class="st-common-util-grouparrayutils-group-page"><p>Groups array elements by attributes specified in the groupDefinition.</p>
+<pre class="prettyprint linenums">
+             var users = [
+                 {username: "tpotthof", company: "//SEIBERT/MEDIA GmbH"},
+                 {username: "mclasen", company: "//SEIBERT/MEDIA GmbH"},
+                 {username: "dcrockford", company: "Paypal Inc."}
+             ];
+             groupArrayUtils.group(users, {by: "company", in: "usersForCompany"});
+
+             // Result
+             // [{
+             //     company: "//SEIBERT/MEDIA GmbH",
+             //     usersForCompany: [
+             //         {username: "tpotthof", company: "//SEIBERT/MEDIA GmbH"},
+             //         {username: "mclasen", company: "//SEIBERT/MEDIA GmbH"}
+             //     ]
+             // },{
+             //     company: "Paypal Inc.",
+             //     usersForCompany: [
+             //         {username: "dcrockford", company: "Paypal Inc."}
+             //     ]
+             // }];
+             </pre>
+</div><h5 id="methods_group_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>array</td><td><a href="" class="label type-hint type-hint-array">Array.&lt;*&gt;</a></td><td><div class="st-common-util-grouparrayutils-group-page"><p>Array to group</p>
+</div></td></tr><tr><td>groupDefinition</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="st-common-util-grouparrayutils-group-page"><p>definition</p>
+</div></td></tr></tbody></table><h5 id="methods_group_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-array">Array.&lt;*&gt;</a></td><td><div class="st-common-util-grouparrayutils-group-page"><p>grouped array</p>
+</div></td></tr></table><h4 id="methods_group_example">Example</h4>
+<div class="example"><div class="st-common-util-grouparrayutils-group-page"><p>This example initializes the scope to a list of names and
+then uses <code>ngRepeat</code> to display every person:
+             <h6 id="methods_group_example_source">Source</h6>
+<div source-edit="st.common.util" source-edit-deps="angular.js app.js" source-edit-html="index.html" source-edit-css="" source-edit-js="app.js" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
+<div class="tabbable"><div class="tab-pane" title="index.html">
+<pre class="prettyprint linenums" ng-set-text="index.html" ng-html-wrap-loaded="st.common.util angular.js app.js"></pre>
+<script type="text/ng-template" id="index.html">
+               <div ng-controller="DataCtrl">
+                 <table>
+                   <tr ng-repeat="user in users">
+                     <td>
+                       <input type="text" ng-model="user.username" placeholder="Username"/>
+                     </td>
+                     <td>
+                       <select ng-model="user.company" ng-options="c for c in companies">
+                       </select>
+                     </td>
+                     <td>
+                       <button class="btn" ng-click="removeUser(user)">
+                         <i class="icon icon-trash"></i>
+                       </button>
+                     </td>
+                   </tr>
+                 </table>
+                 <button ng-click="addUser()" class="btn">
+                   <i class="icon icon-plus"></i> Add user
+                 </button>
+                 <hr>
+                 User grouped by company
+                 <ul>
+                   <li ng-repeat="companyGroup in usersByCompany">
+                     {{ companyGroup.company }}
+                     <a ng-click="showUsers = !showUsers">
+                       {{ showUsers ? 'hide' : 'show' }} users
+                     </a>
+                     <ul ng-show="showUsers">
+                       <li ng-repeat="user in companyGroup.usersForCompany">
+                         {{ user.username }}
+                       </li>
+                     </ul>
+                   </li>
+                 </ul>
+                 <hr>
+                 <div>
+                   <a ng-click="showJson = !showJson">
+                     {{ showJson ? 'Hide' : 'Show' }} json
+                   </a>
+                   <pre ng-show="showJson">
+                     usersByCompany: {{ usersByCompany | json }}
+                   </pre>
+                 </div>
+               </div>
+             </script>
+</div>
+<div class="tab-pane" title="app.js">
+<pre class="prettyprint linenums" ng-set-text="app.js"></pre>
+<script type="text/ng-template" id="app.js">
+                function DataCtrl($scope, groupArrayUtils, arrayUtils) {
+                    $scope.companies = ["//SEIBERT/MEDIA GmbH", "Paypal Inc.", "Google Inc."];
+                    var users = $scope.users = [
+                        {username: "tpotthof", company: "//SEIBERT/MEDIA GmbH"},
+                        {username: "mclasen", company: "//SEIBERT/MEDIA GmbH"},
+                        {username: "dcrockford", company: "Paypal Inc."}
+                    ];
+                    $scope.addUser = function () {
+                        users.push({});
+                    };
+                    $scope.removeUser = function (user) {
+                        arrayUtils.remove(user, users);
+                    };
+                    $scope.$watch("users", function () {
+                        $scope.usersByCompany = groupArrayUtils.group(users, {by: "company", in: "usersForCompany"});
+                    }, true);
+                  }
+             </script>
+</div>
+</div><h6 id="methods_group_example_demo">Demo</h6>
+<div class="well doc-example-live animate-container" ng-embed-app="st.common.util" ng-set-html="index.html" ng-eval-javascript="app.js"></div>
+</div></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
