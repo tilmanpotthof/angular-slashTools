@@ -1,6 +1,6 @@
 {
     "name": "angular-slashTools",
-    "version": "0.1.0-rc3",
+    "version": "0.1.0",
     "devVersion": "0.1.0-build",
     "description": "Collection of services and directives.",
     "info": {
