@@ -1,18 +1,21 @@
 {
-  "name": "slashTools",
-  "devDependencies": {
-    "angular": "~1.2.25",
-    "angular-mocks": "~1.2.25",
-    "bootstrap": "~3.2.0",
-    "jquery": "~2.1.1"
-  },
-  "dependencies": {
-    "angular": "~1.2.25",
-    "angular-mocks": "~1.2.25",
-    "bootstrap": "~3.2.0",
-    "jquery": "~2.1.1"
-  },
-  "resolutions": {
-    "angular": "1.2.25"
-  }
+    "name": "angular-slashTools",
+    "version": "0.1.0",
+    "keywords": "angular utils arrays objects",
+    "main": "dist/angular-slashTools.min.js",
+    "devDependencies": {
+        "angular": "~1.2.25",
+        "angular-mocks": "~1.2.25",
+        "bootstrap": "~3.2.0",
+        "jquery": "~2.1.1"
+    },
+    "dependencies": {
+        "angular": "~1.2.25",
+        "angular-mocks": "~1.2.25",
+        "bootstrap": "~3.2.0",
+        "jquery": "~2.1.1"
+    },
+    "resolutions": {
+        "angular": "1.2.25"
+    }
 }
