@@ -31,4 +31,11 @@ Now you can build the library with...
     grunt
 
 
+## Generate documentation
+
+The documentation is automatically created with the `grunt`command in the `/docs` folder, but it must me served by a webserver to be accessed correctly. Therefore just execute the following command.
+
+    grunt docs
+
+Changes to the documentation should be reloaded automatically after a few seconds.
 

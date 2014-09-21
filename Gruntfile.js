@@ -163,7 +163,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['clean', 'shell', 'copy', 'concat', 'uglify', 'karma:default', 'ngdocs:all']);
 
-    grunt.registerTask('default+docs', ['connect', 'watch:default'])
+    grunt.registerTask('docs', ['connect', 'watch:default'])
     grunt.registerTask('dev-docs', ['connect', 'watch:docs'])
     grunt.registerTask('dev-tests', ['karma:source'])
 
