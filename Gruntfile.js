@@ -1,15 +1,21 @@
 var minimatch = require('minimatch');
-var fs = require('fs');
 
 var globPatterns = {
-    tests: "**/*.spec.js"
-}
+    tests: '**/*.spec.js'
+};
 
 module.exports = function (grunt) {
+    'use strict';
 
     var GIT = {};
-    var BUILD = {}
+    var BUILD = {};
     var PKG = grunt.file.readJSON('package.json');
+
+    // Load grunt tasks automatically
+    require('load-grunt-tasks')(grunt);
+
+    // Time how long tasks take. Can help when optimizing build times
+    require('time-grunt')(grunt);
 
     // Project configuration.
     grunt.initConfig({
@@ -46,30 +52,49 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc-base'
+            },
+            all: [
+                'Gruntfile.js',
+                'src/**/*.js',
+                '!src/**/*.spec.js'
+            ],
+            test: {
+                options: {
+                    jshintrc: '.jshintrc'
+                },
+                src: [
+                    'src/**/*.spec.js'
+                ]
+            }
+        },
+
         karma: {
             default: {
-                configFile: "build/test/karma.conf.js"
+                configFile: 'build/test/karma.conf.js'
             },
             source: {
-                configFile: "test/config/karma.conf.js"
+                configFile: 'test/config/karma.conf.js'
             }
         },
         shell: {
             bower_install: {
-                command: "bower install"
+                command: 'bower install'
             },
             gitHash: {
-                command: "git log --pretty=format:'%h' -n 1",
+                command: 'git log --pretty=format:'%h' -n 1',
                 options: {
                     callback: function (err, stdout, stderr, cb) {
                         GIT.hash = stdout;
-                        console.log("git-version: " + GIT.hash);
+                        console.log('git-version: ' + GIT.hash);
                         cb();
                     }
                 }
             },
             gitStatus: {
-                command: "git status -s",
+                command: 'git status -s',
                 options: {
                     callback: function (err, stdout, stderr, cb) {
                         GIT.status = stdout;
@@ -78,18 +103,18 @@ module.exports = function (grunt) {
                 }
             },
             gitVersionHash: {
-                command: "git log --pretty=format:'%h' -n 1 v" + PKG.version,
+                command: 'git log --pretty=format:"%h" -n 1 v' + PKG.version,
                 options: {
                     callback: function (err, stdout, stderr, cb) {
                         GIT.versionHash = stdout;
-                        console.log("git-hash of pkg.version tag: " + GIT.versionHash);
+                        console.log('git-hash of pkg.version tag: ' + GIT.versionHash);
                         cb();
                     }
                 }
             }
         },
         clean: {
-            build: ["build", "docs"]
+            build: ['build', 'docs']
         },
         watch: {
             default: {
@@ -132,7 +157,7 @@ module.exports = function (grunt) {
                 ],
                 html5Mode: false
             },
-            all: ["src/**/*.js"]
+            all: ['src/**/*.js']
         },
         connect: {
             server: {
@@ -150,17 +175,6 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-shell');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-ngdocs');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-karma-coveralls');
-
     grunt.registerTask('default', ['clean', 'shell', 'copy', 'concat', 'uglify', 'karma:default', 'ngdocs:all']);
 
     grunt.registerTask('docs', ['connect', 'watch:default'])
@@ -170,21 +184,21 @@ module.exports = function (grunt) {
     function bannerHelper() {
         return {
             multilineCommentFromLines: function (lines) {
-                return "/*!\n * " + lines.join("\n * ") + "\n */\n"
+                return '/*!\n * ' + lines.join('\n * ') + '\n */\n'
             },
             generateBanner: function () {
                 var lines = [
-                    "<%= pkg.name %> v<%= build.version() %>",
-                    "source: <%= pkg.info.repository %>",
-                    "",
-                    "<%= git.info() %>",
-                    "Licence: <%= pkg.info.licence %> (<%= pkg.info.licenceUrl %>)"
+                    '<%= pkg.name %> v<%= build.version() %>',
+                    'source: <%= pkg.info.repository %>',
+                    '',
+                    '<%= git.info() %>',
+                    'Licence: <%= pkg.info.licence %> (<%= pkg.info.licenceUrl %>)'
                 ];
                 return this.multilineCommentFromLines(lines);
             },
             generateShortBanner: function () {
                 var lines = [
-                    "<%= pkg.name %> v<%= build.version() %> | <%= git.info() %>"
+                    '<%= pkg.name %> v<%= build.version() %> | <%= git.info() %>'
                 ];
                 return this.multilineCommentFromLines(lines);
             }
@@ -192,11 +206,11 @@ module.exports = function (grunt) {
     };
 
     GIT.info = function () {
-        var gitVersionComment = "git-version: " + GIT.hash;
+        var gitVersionComment = 'git-version: ' + GIT.hash;
         if (this.isClean()) {
             return gitVersionComment;
         } else {
-            return gitVersionComment + " (WARNING: Repo had uncommitted changed while creating the build.)"
+            return gitVersionComment + ' (WARNING: Repo had uncommitted changed while creating the build.)'
         }
     };
     GIT.isClean = function () {
@@ -210,7 +224,7 @@ module.exports = function (grunt) {
         if (GIT.isTaggedWithPackageVersion() && GIT.isClean()) {
             return PKG.version;
         } else {
-            return PKG.devVersion + "-sha." + GIT.hash;
+            return PKG.devVersion + '-sha.' + GIT.hash;
         }
     }
 };

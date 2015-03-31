@@ -1,41 +1,43 @@
 {
-    "name": "angular-slashTools",
-    "version": "0.1.0",
-    "devVersion": "0.1.0-build",
-    "description": "Collection of services and directives.",
-    "info": {
-        "licence": "MIT-LICENCE",
-        "licenceUrl": "https://raw2.github.com/tilmanpotthof/angular-slashTools/master/LICENCE",
-        "repository": "https://github.com/tilmanpotthof/angular-slashTools"
-    },
-    "engines": {
-        "node": ">=0.8.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "http://github.com/ariya/coverage-jasmine-istanbul-karma.git"
-    },
-    "devDependencies": {
-        "karma": "~0.12.1",
-        "karma-coverage": "~0.2.1",
-        "karma-jasmine": "~0.2.2",
-        "karma-phantomjs-launcher": "~0.1.2",
-        "minimatch": "~1.0.0",
-        "grunt": "~0.4.4",
-        "grunt-contrib-concat": "~0.5.0",
-        "grunt-contrib-connect": "~0.8.0",
-        "grunt-contrib-jshint": "~0.10.0",
-        "grunt-contrib-nodeunit": "~0.4.1",
-        "grunt-contrib-uglify": "~0.5.0",
-        "grunt-contrib-copy": "~0.5.0",
-        "grunt-contrib-clean": "~0.6.0",
-        "grunt-contrib-watch": "~0.6.1",
-        "grunt-shell": "~1.0.1",
-        "grunt-karma": "~0.8.2",
-        "grunt-karma-coveralls": "~2.5.1",
-        "grunt-ngdocs": "~0.2.1"
-},
-    "scripts": {
-        "test": "node_modules/.bin/karma start test/config/karma.conf.js"
-    }
+  "name": "angular-slashTools",
+  "version": "0.1.0",
+  "devVersion": "0.1.0-build",
+  "description": "Collection of services and directives.",
+  "info": {
+    "licence": "MIT-LICENCE",
+    "licenceUrl": "https://raw2.github.com/tilmanpotthof/angular-slashTools/master/LICENCE",
+    "repository": "https://github.com/tilmanpotthof/angular-slashTools"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/ariya/coverage-jasmine-istanbul-karma.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-connect": "~0.8.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-jshint": "^0.11.1",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-karma": "~0.8.2",
+    "grunt-karma-coveralls": "~2.5.1",
+    "grunt-ngdocs": "~0.2.1",
+    "grunt-shell": "~1.0.1",
+    "karma": "~0.12.1",
+    "karma-coverage": "~0.2.1",
+    "karma-jasmine": "~0.2.2",
+    "karma-phantomjs-launcher": "~0.1.2",
+    "load-grunt-tasks": "^3.1.0",
+    "minimatch": "~1.0.0",
+    "time-grunt": "^1.1.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/karma start test/config/karma.conf.js"
+  }
 }
