@@ -1,34 +1,31 @@
-'use strict';
-/*global describe, beforEach */
-
-/* jasmine specs for services go here */
-
 describe('service', function () {
+    'use strict';
+
     beforeEach(module('st.shortcuts.shortcutRegistry'));
 
     describe('shortcutRegistry.register', function () {
         it('should throw an error for no arguments', inject(function (shortcutRegistry) {
             expect(function () {
                 shortcutRegistry.register();
-            }).toThrow(new Error("Shortcut notation not correct: 'undefined'"));
+            }).toThrow(new Error('Shortcut notation not correct: "undefined"'));
         }));
 
         it('should create a shortcut', inject(function (shortcutRegistry) {
-            var shortcut = shortcutRegistry.register("cmd+a");
+            var shortcut = shortcutRegistry.register('cmd+a');
             var shortcuts = shortcutRegistry.getAll();
             expect(shortcuts.length).toEqual(1);
             expect(shortcuts[0]).toEqual(angular.copy(shortcut));
         }));
 
         it('should register a shortcut', inject(function (shortcutRegistry, shortcutParser) {
-            var shortcut = shortcutRegistry.register("cmd+a");
-            expect(shortcut).toEqual(shortcutParser.parse("cmd+a"));
+            var shortcut = shortcutRegistry.register('cmd+a');
+            expect(shortcut).toEqual(shortcutParser.parse('cmd+a'));
         }));
 
-        it('should register a shortcut with a given action', inject(function (shortcutRegistry, shortcutParser) {
+        it('should register a shortcut with a given action', inject(function (shortcutRegistry) {
             var dummyAction = function () {
             };
-            var shortcut = shortcutRegistry.register("cmd+a", dummyAction);
+            var shortcut = shortcutRegistry.register('cmd+a', dummyAction);
             expect(shortcut.action).toBe(dummyAction);
         }));
     });
@@ -40,30 +37,31 @@ describe('service', function () {
     });
 
     describe('shortcutRegistry.unregister', function () {
-        it('should unregister the correct shortcut of many registered shortcuts', inject(function (shortcutRegistry, shortcutParser) {
-            var copyShortcut = shortcutRegistry.register("cmd+c");
-            var pasteShortcut = shortcutRegistry.register("cmd+v");
-            var selectAllShortcut = shortcutRegistry.register("cmd+a");
+        it('should unregister the correct shortcut of many registered shortcuts',
+            inject(function (shortcutRegistry) {
+                var copyShortcut = shortcutRegistry.register('cmd+c');
+                var pasteShortcut = shortcutRegistry.register('cmd+v');
+                var selectAllShortcut = shortcutRegistry.register('cmd+a');
 
-            // unregister
-            shortcutRegistry.unregister(selectAllShortcut);
+                // unregister
+                shortcutRegistry.unregister(selectAllShortcut);
 
-            var shortcuts = shortcutRegistry.getAll();
-            expect(shortcuts.length).toEqual(2);
-            expect(shortcuts[0]).toEqual(angular.copy(copyShortcut));
-            expect(shortcuts[1]).toEqual(angular.copy(pasteShortcut));
-        }));
+                var shortcuts = shortcutRegistry.getAll();
+                expect(shortcuts.length).toEqual(2);
+                expect(shortcuts[0]).toEqual(angular.copy(copyShortcut));
+                expect(shortcuts[1]).toEqual(angular.copy(pasteShortcut));
+            }));
     });
 
     describe('shortcutRegistry.displayData', function () {
         it('should return an array of information about the registered shortcuts', inject(function (shortcutRegistry) {
-            var shortcut = shortcutRegistry.register("cmd+a", function () {
-            }, {description: "Select all elements"});
+            shortcutRegistry.register('cmd+a', function () {
+            }, {description: 'Select all elements'});
 
             expect(shortcutRegistry.displayData()).toEqual([
                 {
-                    keys: "cmd+a",
-                    description: "Select all elements"
+                    keys: 'cmd+a',
+                    description: 'Select all elements'
                 }
             ]);
         }));
@@ -74,7 +72,7 @@ describe('service', function () {
 
         beforeEach(function () {
             // reset keydown handlers
-            jQuery(document).off("keydown");
+            jQuery(document).off('keydown');
 
             selectionManager = {
                 selectAll: function () {
@@ -82,7 +80,7 @@ describe('service', function () {
                 }
             };
             // configure cmd+a
-            keydownEvent = jQuery.Event("keydown");
+            keydownEvent = jQuery.Event('keydown');
             keydownEvent.keyCode = 65; // A
             keydownEvent.metaKey = true; // cmd
 
@@ -92,40 +90,41 @@ describe('service', function () {
 
             keydownEvent.preventDefault = function () {
             };
-            spyOn(keydownEvent, "preventDefault");
+            spyOn(keydownEvent, 'preventDefault');
 
             keydownEvent.stopPropagation = function () {
             };
-            spyOn(keydownEvent, "stopPropagation");
+            spyOn(keydownEvent, 'stopPropagation');
 
-            spyOn(selectionManager, "selectAll");
+            spyOn(selectionManager, 'selectAll');
 
         });
 
-        it('should call the test action (selectAll) and preventDefault when "cmd+a" is triggered', inject(function (shortcutRegistry) {
-            shortcutRegistry.register("cmd+a", selectionManager.selectAll);
+        it('should call the test action (selectAll) and preventDefault when "cmd+a" is triggered',
+            inject(function (shortcutRegistry) {
+                shortcutRegistry.register('cmd+a', selectionManager.selectAll);
 
-            jQuery(document).trigger(keydownEvent);
+                jQuery(document).trigger(keydownEvent);
 
-            expect(selectionManager.selectAll).toHaveBeenCalled();
-            expect(keydownEvent.preventDefault).toHaveBeenCalled();
-            expect(keydownEvent.stopPropagation).not.toHaveBeenCalled();
-        }));
+                expect(selectionManager.selectAll).toHaveBeenCalled();
+                expect(keydownEvent.preventDefault).toHaveBeenCalled();
+                expect(keydownEvent.stopPropagation).not.toHaveBeenCalled();
+            }));
 
         it('should not call preventDefault if configured', inject(function (shortcutRegistry) {
-            shortcutRegistry.register("cmd+a", selectionManager.selectAll, {preventDefault: false});
+            shortcutRegistry.register('cmd+a', selectionManager.selectAll, {preventDefault: false});
             jQuery(document).trigger(keydownEvent);
             expect(keydownEvent.preventDefault).not.toHaveBeenCalled();
         }));
 
         it('should call stopPropagation if configured', inject(function (shortcutRegistry) {
-            shortcutRegistry.register("cmd+a", selectionManager.selectAll, {stopPropagation: true});
+            shortcutRegistry.register('cmd+a', selectionManager.selectAll, {stopPropagation: true});
             jQuery(document).trigger(keydownEvent);
             expect(keydownEvent.stopPropagation).toHaveBeenCalled();
         }));
 
         it('should not call test action (selectAll) if "cmd+b" is triggered', inject(function (shortcutRegistry) {
-            shortcutRegistry.register("cmd+a", selectionManager.selectAll);
+            shortcutRegistry.register('cmd+a', selectionManager.selectAll);
 
             keydownEvent.keyCode = 66;
             jQuery(document).trigger(keydownEvent);

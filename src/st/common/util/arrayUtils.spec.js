@@ -1,9 +1,10 @@
+/*jshint camelcase:false */
 describe('service', function () {
     'use strict';
     beforeEach(module('st.common.util.arrayUtils'));
 
     // objects for identity / equality checks
-    var x10_1 = {x: 10};
+    var x10_A = {x: 10};
     var x10_2 = {x: 10};
     var x10_3 = {x: 10};
     var x12 = {x: 12};
@@ -14,24 +15,24 @@ describe('service', function () {
             expect(arrayUtils.inArray(0, [0, 1, 2])).toEqual(true);
         }));
         it('should check if an identical object is in an array', inject(function (arrayUtils) {
-            expect(arrayUtils.inArray(x10_1, [x10_3, x10_2, x10_1, x12])).toEqual(true);
-            expect(arrayUtils.inArray(x10_1, [x10_1, x10_1, x10_1, x10_1])).toEqual(true);
-            expect(arrayUtils.inArray(x10_1, [x10_3, x10_2, x12])).toEqual(false);
+            expect(arrayUtils.inArray(x10_A, [x10_3, x10_2, x10_A, x12])).toEqual(true);
+            expect(arrayUtils.inArray(x10_A, [x10_A, x10_A, x10_A, x10_A])).toEqual(true);
+            expect(arrayUtils.inArray(x10_A, [x10_3, x10_2, x12])).toEqual(false);
         }));
 
         it('should check if an identical object is in an array', inject(function (arrayUtils) {
             // just identify but with explicit parameter
-            expect(arrayUtils.inArray(x10_1, [x10_1], false)).toEqual(true);
+            expect(arrayUtils.inArray(x10_A, [x10_A], false)).toEqual(true);
 
             // equals check for identical object
-            expect(arrayUtils.inArray(x10_1, [x10_1], true)).toEqual(true);
+            expect(arrayUtils.inArray(x10_A, [x10_A], true)).toEqual(true);
 
             // equals for non identical but equal objects
-            expect(arrayUtils.inArray(x10_1, [x10_2], true)).toEqual(true);
-            expect(arrayUtils.inArray(x10_1, [x12, x10_2, x12], true)).toEqual(true);
+            expect(arrayUtils.inArray(x10_A, [x10_2], true)).toEqual(true);
+            expect(arrayUtils.inArray(x10_A, [x12, x10_2, x12], true)).toEqual(true);
 
             // equals for non identical and non equal
-            expect(arrayUtils.inArray(x10_1, [x12], true)).toEqual(false);
+            expect(arrayUtils.inArray(x10_A, [x12], true)).toEqual(false);
         }));
     });
     describe('arrayUtils.addOnce', function () {
@@ -52,92 +53,92 @@ describe('service', function () {
         it('should throw an error for undefined', inject(function (arrayUtils) {
             expect(function () {
                 arrayUtils.checkArray(undefined);
-            }).toThrow(new Error("Expected an array but got undefined"));
+            }).toThrow(new Error('Expected an array but got undefined'));
         }));
 
         it('should throw an error for something else than arrays', inject(function (arrayUtils) {
             expect(function () {
                 arrayUtils.checkArray({});
-            }).toThrow(new Error("Expected an array but got [object Object]"));
+            }).toThrow(new Error('Expected an array but got [object Object]'));
             expect(function () {
                 arrayUtils.checkArray(1);
-            }).toThrow(new Error("Expected an array but got 1"));
+            }).toThrow(new Error('Expected an array but got 1'));
         }));
     });
 
     describe('arrayUtils.extractPropertyFromArray', function () {
         var users = [
             {
-                username: "tpotthof",
+                username: 'tpotthof',
                 address: {
                     number: 33,
-                    street: "Adam-Karrillon-Str",
-                    city: "Mainz"
+                    street: 'Adam-Karrillon-Str',
+                    city: 'Mainz'
                 }
             },
             {
-                username: "mlaspe",
+                username: 'mlaspe',
                 address: {
-                    city: "Wiesbaden"
+                    city: 'Wiesbaden'
                 }
             },
             {
-                username: "jseibert",
+                username: 'jseibert',
                 address: {
-                    city: "Wiesbaden"
+                    city: 'Wiesbaden'
                 }
             },
             {
-                username: "bborbe",
+                username: 'bborbe',
                 address: null
             }
         ];
-        var usernames = ["tpotthof", "mlaspe", "jseibert", "bborbe"];
-        var cities = ["Mainz", "Wiesbaden"];
+        var usernames = ['tpotthof', 'mlaspe', 'jseibert', 'bborbe'];
+        var cities = ['Mainz', 'Wiesbaden'];
         var addresses = [
             {
                 number: 33,
-                street: "Adam-Karrillon-Str",
-                city: "Mainz"
+                street: 'Adam-Karrillon-Str',
+                city: 'Mainz'
             },
             {
-                city: "Wiesbaden"
+                city: 'Wiesbaden'
             }
         ];
 
         it('should throw an error for undefined', inject(function (arrayUtils) {
             expect(function () {
-                arrayUtils.extractPropertiesFromArray(undefined, "x");
-            }).toThrow(new Error("Expected an array but got undefined"));
+                arrayUtils.extractPropertiesFromArray(undefined, 'x');
+            }).toThrow(new Error('Expected an array but got undefined'));
         }));
 
         it('should throw an error for something else than arrays', inject(function (arrayUtils) {
             expect(function () {
-                arrayUtils.extractPropertiesFromArray({}, "x");
-            }).toThrow(new Error("Expected an array but got [object Object]"));
+                arrayUtils.extractPropertiesFromArray({}, 'x');
+            }).toThrow(new Error('Expected an array but got [object Object]'));
             expect(function () {
-                arrayUtils.extractPropertiesFromArray(1, "x");
-            }).toThrow(new Error("Expected an array but got 1"));
+                arrayUtils.extractPropertiesFromArray(1, 'x');
+            }).toThrow(new Error('Expected an array but got 1'));
         }));
 
         it('should return an empty array for an empty array', inject(function (arrayUtils) {
-            expect(arrayUtils.extractPropertiesFromArray([], "x")).toEqual([]);
+            expect(arrayUtils.extractPropertiesFromArray([], 'x')).toEqual([]);
         }));
 
         it('should extract the usernames from the array', inject(function (arrayUtils) {
-            expect(arrayUtils.extractPropertiesFromArray(users, "username")).toEqual(usernames);
+            expect(arrayUtils.extractPropertiesFromArray(users, 'username')).toEqual(usernames);
         }));
 
         it('should extract the cities in the address from the array', inject(function (arrayUtils) {
-            expect(arrayUtils.extractPropertiesFromArray(users, "address.city")).toEqual(cities);
+            expect(arrayUtils.extractPropertiesFromArray(users, 'address.city')).toEqual(cities);
         }));
 
         it('should extract the addresses from the array', inject(function (arrayUtils) {
-            expect(arrayUtils.extractPropertiesFromArray(users, "address")).toEqual(addresses);
+            expect(arrayUtils.extractPropertiesFromArray(users, 'address')).toEqual(addresses);
         }));
 
         it('should return an empty array for an not existing property', inject(function (arrayUtils) {
-            expect(arrayUtils.extractPropertiesFromArray(users, "address.birthday")).toEqual([]);
+            expect(arrayUtils.extractPropertiesFromArray(users, 'address.birthday')).toEqual([]);
         }));
 
     });
@@ -147,8 +148,8 @@ describe('service', function () {
             expect(arrayUtils.remove(3, [5, 4, 3, 2, 1, 0])).toEqual([5, 4, 2, 1, 0]);
             expect(arrayUtils.remove(6, [5, 4, 3, 2, 1, 0])).toEqual([5, 4, 3, 2, 1, 0]);
             expect(arrayUtils.remove(5, [5, 5, 5])).toEqual([5, 5]);
-            expect(arrayUtils.remove("5", [5, "5"])).toEqual([5]);
-            expect(arrayUtils.remove("a", ["aaa", "aa", "a"])).toEqual(["aaa", "aa"]);
+            expect(arrayUtils.remove('5', [5, '5'])).toEqual([5]);
+            expect(arrayUtils.remove('a', ['aaa', 'aa', 'a'])).toEqual(['aaa', 'aa']);
         }));
 
 
