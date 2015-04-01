@@ -6,6 +6,4 @@
  * Module containing common services.
  *
  */
-angular.module("st.common", [
-    "st.common.util"
-]);
+angular.module('st.common', ['st.common.util']);

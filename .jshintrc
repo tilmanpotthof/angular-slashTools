@@ -16,6 +16,6 @@
     "jasmine": false,
     "spyOn": false,
     "customJasmineMatchers": false,
-    "jQuery": true
+    "jQuery": false
   }
 }

@@ -1,15 +1,15 @@
-angular.module("st.shortcuts.shortcutRegistry", [
-        "st.common.util.arrayUtils",
-        "st.shortcuts.shortcutParser"
-    ]).factory("shortcutRegistry", ["$log", "shortcutParser", "arrayUtils", function ($log, shortcutParser, arrayUtils) {
-        "use strict";
+angular.module('st.shortcuts.shortcutRegistry', [
+        'st.common.util.arrayUtils',
+        'st.shortcuts.shortcutParser'
+    ]).factory('shortcutRegistry', function ($log, shortcutParser, arrayUtils) {
+        'use strict';
 
         var shortcutRegistry = [];
 
         function applyEvent(e) {
             angular.forEach(shortcutRegistry, function (shortcut) {
                 if (shortcut.match(e)) {
-                    $log.debug("shortcut: " + shortcut.notation);
+                    $log.debug('shortcut: ' + shortcut.notation);
                     shortcut.action(e);
 
                     if (shortcut.preventDefault) {
@@ -23,7 +23,7 @@ angular.module("st.shortcuts.shortcutRegistry", [
             });
         }
 
-        jQuery(document).on("keydown", applyEvent);
+        jQuery(document).on('keydown', applyEvent);
 
         /**
          * @ngdoc service
@@ -54,4 +54,4 @@ angular.module("st.shortcuts.shortcutRegistry", [
               return angular.copy(shortcutRegistry);
             }
         };
-    }]);
+    });

@@ -57,7 +57,6 @@ module.exports = function (grunt) {
                 jshintrc: '.jshintrc-base'
             },
             all: [
-                'Gruntfile.js',
                 'src/**/*.js',
                 '!src/**/*.spec.js'
             ],
@@ -84,7 +83,7 @@ module.exports = function (grunt) {
                 command: 'bower install'
             },
             gitHash: {
-                command: 'git log --pretty=format:'%h' -n 1',
+                command: 'git log --pretty=format:"%h" -n 1',
                 options: {
                     callback: function (err, stdout, stderr, cb) {
                         GIT.hash = stdout;

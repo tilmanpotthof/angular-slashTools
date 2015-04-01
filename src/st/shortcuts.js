@@ -6,8 +6,8 @@
  * Module containing services and directives for keyboard shortcuts.
  *
  */
-angular.module("st.shortcuts", [
-    "st.shortcuts.shortcut",
-    "st.shortcuts.shortcutParser",
-    "st.shortcuts.shortcutRegistry"
+angular.module('st.shortcuts', [
+    'st.shortcuts.shortcut',
+    'st.shortcuts.shortcutParser',
+    'st.shortcuts.shortcutRegistry'
 ]);

@@ -6,7 +6,7 @@
  * Base module of the slashTools Library containing all sub modules.
  *
  */
-angular.module("st", [
-    "st.common",
-    "st.shortcuts"
+angular.module('st', [
+    'st.common',
+    'st.shortcuts'
 ]);

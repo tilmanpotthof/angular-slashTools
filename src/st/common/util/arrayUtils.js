@@ -1,7 +1,7 @@
-angular.module("st.common.util.arrayUtils", [
-        "st.common.util.objectUtils"
-    ]).factory("arrayUtils", ["objectUtils", function (objectUtils) {
-        "use strict"
+angular.module('st.common.util.arrayUtils', [
+        'st.common.util.objectUtils'
+    ]).factory('arrayUtils', ['objectUtils', function (objectUtils) {
+        'use strict';
 
         /**
          * @ngdoc service
@@ -20,14 +20,15 @@ angular.module("st.common.util.arrayUtils", [
              *
              * @description
              * Returns true, if an identical `element` is in an `array`.
-             * The {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf Array.prototype.indexOf}
-             * function is used internally unless the optional parameter `objectEquality` is set to `true`.
+             * The {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+             * Array.prototype.indexOf} function is used internally unless the optional parameter `objectEquality` is
+             * set to `true`.
              *
              * With the optional parameter `objectEquality` objects are compared by equality not identity with the
              * {@link http://code.angularjs.org/1.2.9/docs/api/angular.equals angular.equals} function.             .
              *
              * <pre>
-             arrayUtils.inArray("a", ["a", "b", "c"]); // true
+             arrayUtils.inArray('a', ['a', 'b', 'c']); // true
              </pre>
              *
              * @param {object} element Element to check
@@ -130,7 +131,7 @@ angular.module("st.common.util.arrayUtils", [
              */
             checkArray: function (array) {
                 if (!angular.isArray(array)) {
-                    throw new Error("Expected an array but got " + array);
+                    throw new Error('Expected an array but got ' + array);
                 }
             },
             /**
@@ -147,37 +148,37 @@ angular.module("st.common.util.arrayUtils", [
              * <pre>
              var users = [
              {
-                 username: "tpotthof",
+                 username: 'tpotthof',
                  address: {
-                     city: "Mainz"
+                     city: 'Mainz'
                  }
              },
              {
-                 username: "pmueller",
+                 username: 'pmueller',
                  address: {
-                     city: "Frankfurt"
+                     city: 'Frankfurt'
                  }
              },
              {
-                 username: "aschmidt",
+                 username: 'aschmidt',
                  address: {
-                     city: "Mainz"
+                     city: 'Mainz'
                  }
              },
              {
-                 username: "nlarssen",
+                 username: 'nlarssen',
                  address: null
              }];
 
-             // returns ["tpotthof", "pmueller", "aschmidt", "nlarssen]
-             arrayUtils.extractPropertiesFromArray(users, "username");
+             // returns ['tpotthof', 'pmueller', 'aschmidt', 'nlarssen]
+             arrayUtils.extractPropertiesFromArray(users, 'username');
 
-             // returns ["Mainz", "Frankfurt", "Wiesbaden"]
-             arrayUtils.extractPropertiesFromArray(users, "address.city");
+             // returns ['Mainz', 'Frankfurt', 'Wiesbaden']
+             arrayUtils.extractPropertiesFromArray(users, 'address.city');
              </pre>
              *
              * @param {Array.<*>} array Array with properties to extract
-             * @param {String} propertyPath Path to the property (e.g. "address.city")
+             * @param {String} propertyPath Path to the property (e.g. 'address.city')
              */
             extractPropertiesFromArray: function (array, propertyPath) {
                 arrayUtils.checkArray(array);

@@ -1,7 +1,7 @@
 (function () {
-    "use strict";
+    'use strict';
 
-    angular.module("st.common.util.objectUtils", []).factory("objectUtils", [function () {
+    angular.module('st.common.util.objectUtils', []).factory('objectUtils', [function () {
         /**
          * @ngdoc service
          * @name st.common.util.objectUtils
@@ -22,17 +22,17 @@
              * The path can be nested like `address.city`in the example below.
              *
              * <pre>
-             objectUtils.getProperty({name:"myName"}, "name"); // "myName"
-             objectUtils.getProperty({address:{city:"New York"}}, "address.city"); // "New York"
-             objectUtils.getProperty({}, "property"); // undefined
+             objectUtils.getProperty({name:'myName'}, 'name'); // 'myName'
+             objectUtils.getProperty({address:{city:'New York'}}, 'address.city'); // 'New York'
+             objectUtils.getProperty({}, 'property'); // undefined
              </pre>
              *
              * @param {object} o Object to get the property from
-             * @param {String} propertyPath Path to the property (e.g. "address.city")
+             * @param {String} propertyPath Path to the property (e.g. 'address.city')
              * @returns {*} Returns the property or undefined.
              */
             getProperty: function (o, propertyPath) {
-                var propertyPieces = propertyPath.split(".");
+                var propertyPieces = propertyPath.split('.');
                 propertyPieces.forEach(function (propertyName) {
                     if (o !== undefined && o !== null) {
                         o = o[propertyName];
@@ -53,27 +53,27 @@
              * or the function throws an error. This error can we avoided with the optional `createProperty` parameter.
              *
              * <pre>
-             // changes "myName" to "John"
-             objectUtils.setProperty({name:"myName"}, "name", "John");
+             // changes 'myName' to 'John'
+             objectUtils.setProperty({name:'myName'}, 'name', 'John');
 
-             // changes "New  York" to "L.A."
-             objectUtils.setProperty({address:{city:"New York"}}, "address.city", "L.A.");
+             // changes 'New  York' to 'L.A.'
+             objectUtils.setProperty({address:{city:'New York'}}, 'address.city', 'L.A.');
 
              // throws an error
-             objectUtils.setProperty({}, "address.city", "New York");
+             objectUtils.setProperty({}, 'address.city', 'New York');
 
-             // creates the nested property {address:{city:"New York"}} on the object
-             objectUtils.setProperty({}, "address.city", "New York", true);
+             // creates the nested property {address:{city:'New York'}} on the object
+             objectUtils.setProperty({}, 'address.city', 'New York', true);
              </pre>
              *
              * @param {object} o Object to set the property
-             * @param {String} propertyPath Path to the property (e.g. "address.city")
+             * @param {String} propertyPath Path to the property (e.g. 'address.city')
              * @param {object} o Object to be set as property
              * @param {boolean=} [createProperty=false] If `true` a nested property path will be created.
              * @returns {*} Returns the property or undefined.
              */
             setProperty: function (o, propertyPath, property, createProperty) {
-                var propertyPieces = propertyPath.split(".");
+                var propertyPieces = propertyPath.split('.');
                 var lastIndex = propertyPieces.length - 1;
                 var propertyPiecesWithoutLast = propertyPieces.slice(0, lastIndex);
                 var lastPiece = propertyPieces[lastIndex];
@@ -87,7 +87,8 @@
                         o = o[propertyName] = {};
                     } else {
                         var nextPropertyName = propertyPieces[index + 1];
-                        var msg = "Cannot set '" + nextPropertyName + "' to non existing property '" + propertyName + "'. To create properties set createProperty=true";
+                        var msg = 'Cannot set "' + nextPropertyName + '" to non existing' +
+                            'property "' + propertyName + '". To create properties set createProperty=true';
                         throw new Error(msg);
                     }
                 });

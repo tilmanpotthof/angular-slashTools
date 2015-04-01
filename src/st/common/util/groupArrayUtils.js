@@ -1,8 +1,9 @@
-angular.module("st.common.util.groupArrayUtils", [
-        "st.common.util.objectUtils",
-        "st.common.util.arrayUtils"
-    ]).factory("groupArrayUtils", ["objectUtils", "arrayUtils", function (objectUtils, arrayUtils) {
-        "use strict"
+angular.module('st.common.util.groupArrayUtils', [
+        'st.common.util.objectUtils',
+        'st.common.util.arrayUtils'
+    ]).factory('groupArrayUtils', ['objectUtils', 'arrayUtils', function (objectUtils, arrayUtils) {
+        'use strict';
+
         /**
          * @ngdoc service
          * @name st.common.util.groupArrayUtils
@@ -27,23 +28,23 @@ angular.module("st.common.util.groupArrayUtils", [
              *
              * <pre>
              var users = [
-                 {username: "tpotthof", company: "//SEIBERT/MEDIA GmbH"},
-                 {username: "mclasen", company: "//SEIBERT/MEDIA GmbH"},
-                 {username: "dcrockford", company: "Paypal Inc."}
+                 {username: 'tpotthof', company: '//SEIBERT/MEDIA GmbH'},
+                 {username: 'mclasen', company: '//SEIBERT/MEDIA GmbH'},
+                 {username: 'dcrockford', company: 'Paypal Inc.'}
              ];
-             groupArrayUtils.group(users, {by: "company", in: "usersForCompany"});
+             groupArrayUtils.group(users, {by: 'company', in: 'usersForCompany'});
 
              // Result
              // [{
-             //     company: "//SEIBERT/MEDIA GmbH",
+             //     company: '//SEIBERT/MEDIA GmbH',
              //     usersForCompany: [
-             //         {username: "tpotthof", company: "//SEIBERT/MEDIA GmbH"},
-             //         {username: "mclasen", company: "//SEIBERT/MEDIA GmbH"}
+             //         {username: 'tpotthof', company: '//SEIBERT/MEDIA GmbH'},
+             //         {username: 'mclasen', company: '//SEIBERT/MEDIA GmbH'}
              //     ]
              // },{
-             //     company: "Paypal Inc.",
+             //     company: 'Paypal Inc.',
              //     usersForCompany: [
-             //         {username: "dcrockford", company: "Paypal Inc."}
+             //         {username: 'dcrockford', company: 'Paypal Inc.'}
              //     ]
              // }];
              </pre>
@@ -55,38 +56,38 @@ angular.module("st.common.util.groupArrayUtils", [
              * @example
              * This example initializes the scope to a list of names and
              * then uses `ngRepeat` to display every person:
-             <example module="st.common.util">
-             <file name="index.html">
-               <div ng-controller="DataCtrl">
+             <example module='st.common.util'>
+             <file name='index.html'>
+               <div ng-controller='DataCtrl'>
                  <table>
-                   <tr ng-repeat="user in users">
+                   <tr ng-repeat='user in users'>
                      <td>
-                       <input type="text" ng-model="user.username" placeholder="Username"/>
+                       <input type='text' ng-model='user.username' placeholder='Username'/>
                      </td>
                      <td>
-                       <select ng-model="user.company" ng-options="c for c in companies">
+                       <select ng-model='user.company' ng-options='c for c in companies'>
                        </select>
                      </td>
                      <td>
-                       <button class="btn" ng-click="removeUser(user)">
-                         <i class="icon icon-trash"></i>
+                       <button class='btn' ng-click='removeUser(user)'>
+                         <i class='icon icon-trash'></i>
                        </button>
                      </td>
                    </tr>
                  </table>
-                 <button ng-click="addUser()" class="btn">
-                   <i class="icon icon-plus"></i> Add user
+                 <button ng-click='addUser()' class='btn'>
+                   <i class='icon icon-plus'></i> Add user
                  </button>
                  <hr>
                  User grouped by company
                  <ul>
-                   <li ng-repeat="companyGroup in usersByCompany">
+                   <li ng-repeat='companyGroup in usersByCompany'>
                      {{ companyGroup.company }}
-                     <a ng-click="showUsers = !showUsers">
+                     <a ng-click='showUsers = !showUsers'>
                        {{ showUsers ? 'hide' : 'show' }} users
                      </a>
-                     <ul ng-show="showUsers">
-                       <li ng-repeat="user in companyGroup.usersForCompany">
+                     <ul ng-show='showUsers'>
+                       <li ng-repeat='user in companyGroup.usersForCompany'>
                          {{ user.username }}
                        </li>
                      </ul>
@@ -94,22 +95,22 @@ angular.module("st.common.util.groupArrayUtils", [
                  </ul>
                  <hr>
                  <div>
-                   <a ng-click="showJson = !showJson">
+                   <a ng-click='showJson = !showJson'>
                      {{ showJson ? 'Hide' : 'Show' }} json
                    </a>
-                   <pre ng-show="showJson">
+                   <pre ng-show='showJson'>
                      usersByCompany: {{ usersByCompany | json }}
                    </pre>
                  </div>
                </div>
              </file>
-             <file name="app.js">
+             <file name='app.js'>
                 function DataCtrl($scope, groupArrayUtils, arrayUtils) {
-                    $scope.companies = ["//SEIBERT/MEDIA GmbH", "Paypal Inc.", "Google Inc."];
+                    $scope.companies = ['//SEIBERT/MEDIA GmbH', 'Paypal Inc.', 'Google Inc.'];
                     var users = $scope.users = [
-                        {username: "tpotthof", company: "//SEIBERT/MEDIA GmbH"},
-                        {username: "mclasen", company: "//SEIBERT/MEDIA GmbH"},
-                        {username: "dcrockford", company: "Paypal Inc."}
+                        {username: 'tpotthof', company: '//SEIBERT/MEDIA GmbH'},
+                        {username: 'mclasen', company: '//SEIBERT/MEDIA GmbH'},
+                        {username: 'dcrockford', company: 'Paypal Inc.'}
                     ];
                     $scope.addUser = function () {
                         users.push({});
@@ -117,8 +118,8 @@ angular.module("st.common.util.groupArrayUtils", [
                     $scope.removeUser = function (user) {
                         arrayUtils.remove(user, users);
                     };
-                    $scope.$watch("users", function () {
-                        $scope.usersByCompany = groupArrayUtils.group(users, {by: "company", in: "usersForCompany"});
+                    $scope.$watch('users', function () {
+                        $scope.usersByCompany = groupArrayUtils.group(users, {by: 'company', in: 'usersForCompany'});
                     }, true);
                   }
              </file>
@@ -166,10 +167,11 @@ angular.module("st.common.util.groupArrayUtils", [
 
                     var result = groupArrayUtils.group(array, groupDefinition);
                     result.forEach(function (element) {
-                        element[listLabel] = groupArrayUtils._groupByMultipleDefs(element[listLabel], groupDefinitionsRest);
+                        element[listLabel] = groupArrayUtils._groupByMultipleDefs(element[listLabel],
+                            groupDefinitionsRest);
                     });
 
-                    return result
+                    return result;
                 }
             }
         };

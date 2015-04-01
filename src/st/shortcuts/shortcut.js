@@ -1,7 +1,7 @@
-angular.module("st.shortcuts.shortcut", [
-        "st.shortcuts.shortcutRegistry"
-    ]).directive("shortcut", ["$parse", "$log", "shortcutRegistry", function ($parse, $log, shortcutRegistry) {
-        "use strict";
+angular.module('st.shortcuts.shortcut', [
+        'st.shortcuts.shortcutRegistry'
+    ]).directive('shortcut', ['$parse', '$log', 'shortcutRegistry', function ($parse, $log, shortcutRegistry) {
+        'use strict';
 
         /**
          * @ngdoc directive
@@ -12,13 +12,13 @@ angular.module("st.shortcuts.shortcut", [
          *
          */
         return {
-            restrict: "A,E",
+            restrict: 'A,E',
             link: function ($scope, element, attributes) {
                 var action, notation;
 
-                if (element.is("shortcut")) {
+                if (element.is('shortcut')) {
                     if (!attributes.keys) {
-                        throw new Error("Attribute 'keys' is required for the shortcut directive.")
+                        throw new Error('Attribute "keys" is required for the shortcut directive.');
                     }
                     notation = attributes.keys.toLowerCase();
                 } else {
@@ -49,17 +49,17 @@ angular.module("st.shortcuts.shortcut", [
                     description: attributes.shortcutDescription || attributes.description
                 };
 
-                if (attributes.hasOwnProperty("shortcutAddTooltip")) {
+                if (attributes.hasOwnProperty('shortcutAddTooltip')) {
                     element.tooltip(jQuery.extend({
                         title: attributes.shortcut.toUpperCase(),
-                        placement: "right",
+                        placement: 'right',
                         delay: {show: 2000, hide: 0}
                     }, $scope.$eval(attributes.shortcutAddTooltip)));
                 }
 
                 var shortcut = shortcutRegistry.register(notation, action, options);
 
-                $scope.$on("$destroy", function () {
+                $scope.$on('$destroy', function () {
                     shortcutRegistry.unregister(shortcut);
                 });
             }
