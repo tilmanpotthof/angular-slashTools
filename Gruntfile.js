@@ -53,13 +53,16 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
-            options: {
-                jshintrc: '.jshintrc-base'
+            src: {
+                options: {
+                    jshintrc: '.jshintrc-base'
+                },
+                src: [
+
+                    'src/**/*.js',
+                    '!src/**/*.spec.js'
+                ]
             },
-            all: [
-                'src/**/*.js',
-                '!src/**/*.spec.js'
-            ],
             test: {
                 options: {
                     jshintrc: '.jshintrc'
