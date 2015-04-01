@@ -42,7 +42,7 @@ describe('service', function () {
         it('should throw an error for setting to a non existing attribute adress', inject(function (objectUtils) {
             expect(function () {
                 objectUtils.setProperty(user, 'address.city', 'Mainz');
-            }).toThrow(new Error('Cannot set "city" to non existing property "address".' +
+            }).toThrow(new Error('Cannot set "city" to non existing property "address". ' +
                 'To create properties set createProperty=true'));
         }));
 

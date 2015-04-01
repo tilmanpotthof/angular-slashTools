@@ -87,7 +87,7 @@
                         o = o[propertyName] = {};
                     } else {
                         var nextPropertyName = propertyPieces[index + 1];
-                        var msg = 'Cannot set "' + nextPropertyName + '" to non existing' +
+                        var msg = 'Cannot set "' + nextPropertyName + '" to non existing ' +
                             'property "' + propertyName + '". To create properties set createProperty=true';
                         throw new Error(msg);
                     }
